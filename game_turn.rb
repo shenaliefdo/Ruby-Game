@@ -7,13 +7,16 @@ module GameTurn
         rand = TreasureTrove.random
         if die.roll > 4
             p.w00t
-            puts "#{p.name} found a #{rand.name} worth #{rand.points} points"
+            p.found_treasure(rand)
+            p.points
         elsif die.roll > 2
             puts "#{p.name} was skipped!"
-            puts "#{p.name} found a #{rand.name} worth #{rand.points} points"
+            p.found_treasure(rand)
+            p.points
         else
             p.blam
-            puts "#{p.name} found a #{rand.name} worth #{rand.points} points"
+            p.found_treasure(rand)
+            p.points
         end
     end
 end

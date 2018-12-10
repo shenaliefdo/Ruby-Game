@@ -1,15 +1,24 @@
 class Player
     attr_reader :health
     attr_accessor :name 
-    def score
-        @health + @name.length
-    end
     def initialize(name,health=100)
         @name = name.capitalize
         @health = health
+        @found_treasure = Hash.new(0)
+    end
+    def found_treasure(treasure)
+        @found_treasure[treasure.name] += treasure.points
+        puts "#{@name} found a #{treasure.name} worth #{treasure.points} points." 
+        puts "#{@name}'s treasures: #{@found_treasure}"
+    end
+    def points
+        @found_treasure.values.reduce(0,:+)
+    end
+    def score
+        @health + points
     end
     def to_s
-        "I'm #{@name} with a health of #{@health} and a score of #{score}"
+        "I'm #{@name} with a health = #{@health}, points = #{points}, and a score = #{score}"
     end
     def <=>(other_player)
         other_player.score <=> score

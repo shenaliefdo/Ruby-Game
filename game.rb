@@ -12,6 +12,13 @@ class Game
     def add_player(p)
         @players << p
     end
+    def total_points
+        sum = 0
+        @players.each do |p|
+            sum += p.points
+        end
+        puts "\n#{sum} total points from treasures found!"
+    end
     def play(round)
         puts "There are #{@players.length} players in #{@title}:"
         @players.each do |p|
@@ -22,7 +29,6 @@ class Game
         treasures.each do |treasure|
             puts "A #{treasure.name} is worth #{treasure.points} points"
         end
-        
         1.upto(round) do |r|
             puts "\nRound #{r}:"
             @players.each do |p|
@@ -50,7 +56,12 @@ class Game
         wimpy.each do |i|
             puts "#{i.name} (#{i.health})"
         end
-        puts "\n#{title} High Scores:"
+        @players.each do |player|
+            puts "\n#{player.name}'s point totals:"
+            puts "#{player.points} grand total points"
+        end
+        puts "#{total_points}"
+        puts "#{title} High Scores:"
         sorted_players = @players.sort.each do |p|
            puts "#{p.name}.....#{p.score}"
         end

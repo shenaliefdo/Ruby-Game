@@ -12,10 +12,14 @@ describe Player do
         @player.health.should == 80
     end
     it "has a string representation" do
-        @player.to_s.should == "I'm Shenalie with a health of 80 and a score of 88"
+        @player.found_treasure(Treasure.new(:hammer, 50))
+        @player.to_s.should == "I'm Shenalie with a health = 80, points = 50, and a score = 130"
     end
-    it "computes a score as the sum of its health and length of name" do
-        @player.score.should == @health + @player.name.length
+    it "computes a score as the sum of its health and points" do
+        @player.found_treasure(Treasure.new(:hammer, 50))
+        @player.found_treasure(Treasure.new(:skillet, 100))
+
+        @player.score.should == 230
     end
     it "increased health by 15" do
         @player.w00t
