@@ -29,6 +29,18 @@ describe Player do
         @player.blam
         @player.health.should == @health - 10
     end
+    it "yields each found treasure and its total points" do
+        @player.found_treasure(Treasure.new(:skillet, 100))
+        @player.found_treasure(Treasure.new(:skillet, 100))
+        @player.found_treasure(Treasure.new(:hammer, 50))
+        @player.found_treasure(Treasure.new(:bottle, 5))
+        @player.found_treasure(Treasure.new(:bottle, 5))
+        @player.found_treasure(Treasure.new(:bottle, 5))
+        @player.found_treasure(Treasure.new(:bottle, 5))
+        @player.found_treasure(Treasure.new(:bottle, 5))
+      
+        @player.each_found_treasure.should == {:bottle=>25, :hammer=>50,:skillet=>200}
+    end
     context "strong" do
         before do
             @health = 150

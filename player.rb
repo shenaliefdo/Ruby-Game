@@ -11,6 +11,9 @@ class Player
         puts "#{@name} found a #{treasure.name} worth #{treasure.points} points." 
         puts "#{@name}'s treasures: #{@found_treasure}"
     end
+    def each_found_treasure
+        @found_treasure.each {|key, value| puts "#{value} total #{key} points"}
+    end
     def points
         @found_treasure.values.reduce(0,:+)
     end

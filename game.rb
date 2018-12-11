@@ -12,6 +12,21 @@ class Game
     def add_player(p)
         @players << p
     end
+    def load_players(file)
+        arr = IO.readlines(file)
+        arr.each do |line|
+            name, health = line.split(",")
+            p = Player.new(name,Integer(health))
+            add_player(p)
+        end
+    end
+    def save_high_scores(file)
+        f = File.open(file,"w") 
+        f.write("#{@title}'s High Scores:")
+        sorted_players = @players.sort.each do |p|
+           f.write("\n#{p.name}.....#{p.score}")
+        end
+    end
     def total_points
         sum = 0
         @players.each do |p|
@@ -56,9 +71,10 @@ class Game
         wimpy.each do |i|
             puts "#{i.name} (#{i.health})"
         end
-        @players.each do |player|
-            puts "\n#{player.name}'s point totals:"
-            puts "#{player.points} grand total points"
+        @players.each do |p|
+            puts "\n#{p.name}'s point totals:"
+            p.each_found_treasure
+            puts "#{p.points} grand total points"
         end
         puts "#{total_points}"
         puts "#{title} High Scores:"
