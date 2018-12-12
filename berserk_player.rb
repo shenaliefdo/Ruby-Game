@@ -6,7 +6,6 @@ class BerserkPlayer < Player
         @w00t_count = 0
     end
     def berserk?
-        puts @w00t_count
         @w00t_count > 5 ? true : false
     end
     def w00t
