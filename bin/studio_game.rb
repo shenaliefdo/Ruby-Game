@@ -1,6 +1,6 @@
-require_relative 'game'
-require_relative 'clumsy_player'
-require_relative 'berserk_player'
+require_relative '../lib/game'
+require_relative '../lib/clumsy_player'
+require_relative '../lib/berserk_player'
 
 knuckleheads = Game.new("Knuckleheads")
 
